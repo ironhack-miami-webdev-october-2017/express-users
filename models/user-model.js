@@ -15,11 +15,11 @@ const userSchema = new Schema(
       email: {
           type: String,
           required: [true, "What's your email?"],
-          match: [/.+@.+/, "Emails need an @ sign"]
+          match: [/.+@.+/, "Emails need an @ sign."]
       },
       encryptedPassword: {
           type: String,
-          required: [true, "We need a password"]
+          required: [true, "We need a password."]
       }
   },
 
