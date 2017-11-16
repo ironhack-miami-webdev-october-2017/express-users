@@ -1,0 +1,18 @@
+<h2> Edit Your Profile </h2>
+
+<p>
+  Your email is <b><%= currentUser.email %></b>.
+</p>
+
+<p>
+  <small> (For "security reasons" we don't allow changing emails.) </small>
+</p>
+
+
+<form id="form" method="" action="">
+  <label for="full-name-input"> Full Name </label>
+  <input  id="full-name-input" type="text" placeholder="e.g. Khal Drogo"
+      name="editFullName" value="<%= currentUser.fullName %>" />
+
+  <button> Save Changes </button>
+</form>

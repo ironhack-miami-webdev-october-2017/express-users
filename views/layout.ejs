@@ -11,7 +11,20 @@
 
       <nav>
         <a href="/"> Home </a>
-        <a href="/signup"> Sign Up </a>
+
+        <% if (currentUser) { %>
+
+          <a href="/settings"> Edit Profile </a>
+          <a href="/logout"> Log Out </a>
+
+          <b> <%= currentUser.email %> </b>
+
+        <% } else { %>
+
+          <a href="/signup"> Sign Up </a>
+          <a href="/login"> Log In </a>
+
+        <% } %>
       </nav>
     </header>
 
