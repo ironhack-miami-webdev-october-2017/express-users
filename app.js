@@ -64,6 +64,12 @@ app.use(myUserRouter);
 
 const myPrefRouter = require("./routes/preferences-router");
 app.use(myPrefRouter);
+
+const myRoomRouter = require("./routes/room-router");
+app.use(myRoomRouter);
+
+const myAdminRouter = require("./routes/admin-router");
+app.use(myAdminRouter);
 // -----------------------------------------------------------------------------
 
 

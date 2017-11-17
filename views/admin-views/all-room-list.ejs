@@ -1,0 +1,19 @@
+<h2> All Rooms </h2>
+
+<ul>
+  <% listOfRooms.forEach((oneRoom) => { %>
+    <li>
+      <h3> <%= oneRoom.name %> </h3>
+      <img src="<%= oneRoom.photoUrl %>" />
+      <p> <%= oneRoom.description %> </p>
+      <p>
+        Owned By: <b><%= oneRoom.owner %></b>
+
+        <!-- compare ObjectIds as strings (they are NOT strings by default) -->
+        <% if (oneRoom.owner.toString() === currentUser._id.toString()) { %>
+          (this is you)
+        <% } %>
+      </p>
+    </li>
+  <% }) %>
+</ul>

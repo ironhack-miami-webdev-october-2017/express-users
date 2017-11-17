@@ -1,0 +1,23 @@
+<h2> All Users </h2>
+
+<ul>
+  <% listOfUsers.forEach((oneUser) => {  %>
+    <li>
+      <h3> <%= oneUser.fullName %> </h3>
+
+      <% if (oneUser.email) { %>
+
+        <p> Email: <%= oneUser.email %> </p>
+
+      <% } else if (oneUser.facebookID) { %>
+
+        <p> Facebook ID: <%= oneUser.facebookID %> </p>
+
+      <% } else if (oneUser.googleID) { %>
+
+        <p> Google ID: <%= oneUser.googleID %> </p>
+        
+      <% } %>
+    </li>
+  <% }) %>
+</ul>
