@@ -155,7 +155,7 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-// Facebook login routes
+// Facebook log in routes
 // -----------------------------------------------------------------------------
 
 // Link to "/facebook/login" to initiate the login process
@@ -171,5 +171,26 @@ router.get("/facebook/success",    // no normal callback here
   })
 );
 
+
+// Google log in routes
+// -----------------------------------------------------------------------------
+
+// Link to "/google/login" to initiate the login process
+router.get("/google/login",     // no normal callback here
+  passport.authenticate("google", {
+      scope: [
+          "https://www.googleapis.com/auth/plus.login",
+          "https://www.googleapis.com/auth/plus.profile.emails.read"
+      ]
+  })
+);
+
+// Google will redirect here after login is successful
+router.get("/google/success",     // no normal callback here
+  passport.authenticate("google", {
+      successRedirect: "/",
+      failureRedirect: "/login"
+  })
+);
 
 module.exports = router;
