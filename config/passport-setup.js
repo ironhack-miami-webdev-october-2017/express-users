@@ -1,4 +1,5 @@
 const passport = require("passport");
+const FbStrategy = require("passport-facebook").Strategy;
 
 const UserModel = require("../models/user-model");
 
@@ -36,3 +37,56 @@ passport.deserializeUser((idFromSession, cb) => {
 
 
 // STRATEGIES (npm packages that enable additional methods of logging in)
+
+// Login With Facebook
+
+// passport.use(new FbStrategy());
+passport.use(
+  new FbStrategy(
+    // 1st arg of FbStrategy -> settings object
+    {
+        // Facebook credentials
+        // App ID
+        clientID:     "????????",
+        // App Secret
+        clientSecret: "????????",
+
+        // Where to go after log in is successful (one of our routes)
+        callbackURL: "/facebook/success"
+    },
+
+    // 2nd arg of FbStrategy -> callback
+    (accessToken, refreshToken, profile, callback) => {
+        // profile contains the user info we get from Facebook
+        console.log('FACEBOOK profile -----------------------');
+        console.log(profile);
+
+        // Check if there's already a document in the database for this user
+        UserModel.findOne({ facebookID: profile.id })
+          .then((userFromDb) => {
+              // if there's already a user account
+              if (userFromDb) {
+                  // tell Passport to use that user account
+                  callback(null, userFromDb);
+                  return;
+              }
+
+              // create a user account if there is none
+              const theUser = new UserModel({
+                  facebookID: profile.id,
+                  fullName: profile.displayName
+              });
+
+              return theUser.save();
+          })
+          .then((newUser) => {
+              // tell Passport to use the new user account
+              callback(null, newUser);
+          })
+          .catch((err) => {
+              // tell Passport there was an error in the login process
+              callback(err);
+          });
+    }
+  ) // new FbStrategy()
+); // passport.use()

@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 const UserModel = require("../models/user-model");
 
@@ -152,6 +153,23 @@ router.get("/logout", (req, res, next) => {
 
     res.redirect("/");
 });
+
+
+// Facebook login routes
+// -----------------------------------------------------------------------------
+
+// Link to "/facebook/login" to initiate the login process
+router.get("/facebook/login", passport.authenticate("facebook"));
+                                        //               |
+                                        // This name comes from the strategy
+
+// Facebook will redirect here after login is successful
+router.get("/facebook/success",    // no normal callback here
+  passport.authenticate("facebook", {
+      successRedirect: "/",
+      failureRedirect: "/login"
+  })
+);
 
 
 module.exports = router;
