@@ -54,7 +54,10 @@ passport.use(
         clientSecret: process.env.FACEBOOK_SECRET,
 
         // Where to go after log in is successful (one of our routes)
-        callbackURL: "/facebook/success"
+        callbackURL: "/facebook/success",
+
+        // fixes Facebook log in for production
+        proxy: true
     },
 
     // 2nd arg of FbStrategy -> callback
