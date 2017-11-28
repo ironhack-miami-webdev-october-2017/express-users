@@ -12,6 +12,10 @@ const userSchema = new Schema(
           type: String,
           required: [true, "Tell us your name."]
       },
+      avatar: {
+          type: String,
+          default: "/images/default-avatar.gif"
+      },
 
       // normal login users
       email: {

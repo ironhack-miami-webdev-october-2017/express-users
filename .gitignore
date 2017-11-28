@@ -31,3 +31,6 @@ npm-debug.log
 
 # Ignore our environment variables file
 .env
+
+# Ignore our local uploads
+public/uploads
